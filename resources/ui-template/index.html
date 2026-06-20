@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UI Template Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=template-extra-1" />
+  </head>
+  <body>
+    <div class="app-shell" data-theme="dark">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">UI</div>
+          <div>
+            <h1>UI Template</h1>
+            <p>Component probe</p>
+          </div>
+        </div>
+
+        <div class="topbar-center" role="search">
+          <span class="material-symbols-rounded" aria-hidden="true">search</span>
+          <input type="search" placeholder="Search components" aria-label="Search components" />
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button" type="button" title="Run preview" aria-label="Run preview">
+            <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+          </button>
+          <button class="icon-button" type="button" title="Open history" aria-label="Open history">
+            <span class="material-symbols-rounded" aria-hidden="true">history</span>
+          </button>
+          <button class="icon-button" id="themeToggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+            <span class="material-symbols-rounded" aria-hidden="true">light_mode</span>
+          </button>
+          <button class="primary-button" id="openDialog" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">add</span>
+            New set
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <nav class="rail" aria-label="Primary">
+          <button class="rail-button active" type="button" title="Components" aria-label="Components">
+            <span class="material-symbols-rounded" aria-hidden="true">widgets</span>
+          </button>
+          <button class="rail-button" type="button" title="Tokens" aria-label="Tokens">
+            <span class="material-symbols-rounded" aria-hidden="true">palette</span>
+          </button>
+          <button class="rail-button" type="button" title="Layouts" aria-label="Layouts">
+            <span class="material-symbols-rounded" aria-hidden="true">dashboard</span>
+          </button>
+          <button class="rail-button" type="button" title="States" aria-label="States">
+            <span class="material-symbols-rounded" aria-hidden="true">fact_check</span>
+          </button>
+          <button class="rail-button rail-chat-button active" id="chatRailButton" type="button" title="Chat" aria-label="Chat" aria-expanded="true" aria-controls="railChatPanel">
+            <span class="material-symbols-rounded" aria-hidden="true">forum</span>
+            <span class="rail-dot" aria-hidden="true"></span>
+          </button>
+          <div class="rail-spacer"></div>
+          <button class="rail-button" id="settingsButton" type="button" title="Settings" aria-label="Settings" aria-expanded="false">
+            <span class="material-symbols-rounded" aria-hidden="true">settings</span>
+          </button>
+        </nav>
+
+        <aside class="rail-chat-panel open" id="railChatPanel" aria-label="Assistant chat" aria-hidden="false">
+          <section class="sidebar-chat rail-chat-shell">
+            <div class="sidebar-chat-header">
+              <div>
+                <h2>Chat</h2>
+                <p>Rail assist drawer</p>
+              </div>
+              <div class="rail-chat-header-actions">
+                <button class="icon-button compact" id="chatHistoryButton" type="button" title="Conversation history" aria-label="Conversation history">
+                  <span class="material-symbols-rounded" aria-hidden="true">history</span>
+                </button>
+                <button class="icon-button compact" id="railChatClose" type="button" title="Close chat" aria-label="Close chat">
+                  <span class="material-symbols-rounded" aria-hidden="true">close</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="chat-panel">
+              <div class="chat-toolbar">
+                <div class="listbox-field compact-model" data-listbox>
+                  <span class="field-label">Model</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">GPT-5</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>GPT-5</span>
+                      <small>General work</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>GPT-5 Mini</span>
+                      <small>Fast drafts</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Image Assistant</span>
+                      <small>Visual prompts</small>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="listbox-field compact-reasoning" data-listbox>
+                  <span class="field-label">Think</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">Medium</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Low</span>
+                      <small>Quick answer</small>
+                    </button>
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>Medium</span>
+                      <small>Balanced</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>High</span>
+                      <small>Deep review</small>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chat-thread" id="chatThread" aria-live="polite">
+                <article class="chat-message assistant">
+                  <div class="chat-avatar">
+                    <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                  </div>
+                  <div class="chat-bubble">
+                    <div class="chat-meta">
+                      <strong>Assistant</strong>
+                      <span>Medium</span>
+                    </div>
+                    <p>왼쪽 rail의 Chat 버튼에서 열리는 작업 보조 drawer야.</p>
+                  </div>
+                </article>
+
+                <article class="chat-message user">
+                  <div class="chat-bubble">
+                    <div class="chat-meta">
+                      <strong>You</strong>
+                      <span>2 files</span>
+                    </div>
+                    <p>아이콘 메뉴에서 바로 열고 닫는 채팅 기본형으로 보고 싶어.</p>
+                    <div class="chat-attachment-row">
+                      <span class="attachment-chip">
+                        <span class="material-symbols-rounded" aria-hidden="true">image</span>
+                        ui-reference.png
+                      </span>
+                      <span class="attachment-chip">
+                        <span class="material-symbols-rounded" aria-hidden="true">description</span>
+                        notes.md
+                      </span>
+                    </div>
+                  </div>
+                  <div class="chat-avatar user-avatar">Y</div>
+                </article>
+
+                <article class="chat-message assistant typing" id="typingState">
+                  <div class="chat-avatar">
+                    <span class="material-symbols-rounded" aria-hidden="true">psychology</span>
+                  </div>
+                  <div class="chat-bubble">
+                    <div class="chat-meta">
+                      <strong>Assistant</strong>
+                      <span>Thinking</span>
+                    </div>
+                    <div class="typing-dots" aria-label="Assistant is thinking">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="composer-attachments" id="composerAttachments">
+                <span class="attachment-chip">
+                  <span class="material-symbols-rounded" aria-hidden="true">attach_file</span>
+                  layout-snapshot.png
+                  <button type="button" aria-label="Remove layout-snapshot.png">
+                    <span class="material-symbols-rounded" aria-hidden="true">close</span>
+                  </button>
+                </span>
+              </div>
+
+              <div class="chat-composer">
+                <div class="composer-actions">
+                  <button class="icon-button compact" id="attachFileButton" type="button" title="Attach file" aria-label="Attach file">
+                    <span class="material-symbols-rounded" aria-hidden="true">attach_file</span>
+                  </button>
+                  <button class="icon-button compact" id="micButton" type="button" title="Voice input" aria-label="Voice input" aria-pressed="false">
+                    <span class="material-symbols-rounded" aria-hidden="true">mic</span>
+                  </button>
+                </div>
+                <label class="chat-input-wrap" for="chatInput">
+                  <textarea id="chatInput" rows="2">이 UI를 rail 채팅 drawer 기본값으로 더 다듬어줘.</textarea>
+                </label>
+                <button class="primary-button send-button" id="sendChatButton" type="button">
+                  <span class="material-symbols-rounded" aria-hidden="true">send</span>
+                  Send
+                </button>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <aside class="resource-panel" aria-label="Component sets">
+          <div class="panel-header">
+            <div>
+              <h2>Component Sets</h2>
+              <p>12 patterns</p>
+            </div>
+            <button class="icon-button compact" type="button" title="Add set" aria-label="Add set">
+              <span class="material-symbols-rounded" aria-hidden="true">add</span>
+            </button>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="Set filter">
+            <button class="segment active" type="button" role="tab" aria-selected="true">Core</button>
+            <button class="segment" type="button" role="tab" aria-selected="false">Data</button>
+            <button class="segment" type="button" role="tab" aria-selected="false">AI</button>
+          </div>
+
+          <label class="field search-field">
+            <span class="material-symbols-rounded" aria-hidden="true">filter_list</span>
+            <input id="resourceSearch" type="search" placeholder="Filter sets" />
+          </label>
+
+          <div class="resource-list" id="resourceList">
+            <button class="resource-row selected" type="button" data-name="editor shell">
+              <span class="resource-icon material-symbols-rounded" aria-hidden="true">view_quilt</span>
+              <span>
+                <strong>Editor shell</strong>
+                <small>Topbar, rail, panels</small>
+              </span>
+              <em>Live</em>
+            </button>
+            <button class="resource-row" type="button" data-name="controls">
+              <span class="resource-icon material-symbols-rounded" aria-hidden="true">tune</span>
+              <span>
+                <strong>Controls</strong>
+                <small>Buttons, fields, toggles</small>
+              </span>
+              <em>Draft</em>
+            </button>
+            <button class="resource-row" type="button" data-name="resource list">
+              <span class="resource-icon material-symbols-rounded" aria-hidden="true">storage</span>
+              <span>
+                <strong>Resource list</strong>
+                <small>Dense selectable rows</small>
+              </span>
+              <em>Live</em>
+            </button>
+            <button class="resource-row" type="button" data-name="inspector">
+              <span class="resource-icon material-symbols-rounded" aria-hidden="true">right_panel_open</span>
+              <span>
+                <strong>Inspector</strong>
+                <small>Properties and states</small>
+              </span>
+              <em>Draft</em>
+            </button>
+            <button class="resource-row" type="button" data-name="prompt dock">
+              <span class="resource-icon material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+              <span>
+                <strong>Prompt dock</strong>
+                <small>AI assist surface</small>
+              </span>
+              <em>Test</em>
+            </button>
+          </div>
+
+        </aside>
+
+        <main class="content">
+          <section class="page-title">
+            <div>
+              <p class="eyebrow">Tool UI / Dense editor</p>
+              <h2>Core Component Board</h2>
+            </div>
+            <div class="status-group" aria-label="Status">
+              <span class="status-chip success">Stable</span>
+              <span class="status-chip warning">Needs QA</span>
+              <span class="status-chip neutral">v0.1</span>
+            </div>
+          </section>
+
+          <section class="toolbar-band" aria-label="Canvas toolbar">
+            <div class="tab-bar" role="tablist" aria-label="Preview tabs">
+              <button class="tab active" type="button" role="tab" aria-selected="true">Components</button>
+              <button class="tab" type="button" role="tab" aria-selected="false">Tokens</button>
+              <button class="tab" type="button" role="tab" aria-selected="false">States</button>
+            </div>
+            <div class="tool-cluster">
+              <button class="icon-button compact" type="button" title="Undo" aria-label="Undo">
+                <span class="material-symbols-rounded" aria-hidden="true">undo</span>
+              </button>
+              <button class="icon-button compact" type="button" title="Redo" aria-label="Redo">
+                <span class="material-symbols-rounded" aria-hidden="true">redo</span>
+              </button>
+              <button class="secondary-button" type="button">
+                <span class="material-symbols-rounded" aria-hidden="true">download</span>
+                Export
+              </button>
+            </div>
+          </section>
+
+          <div class="component-grid">
+            <section class="surface controls-surface">
+              <div class="surface-header">
+                <h3>Controls</h3>
+                <span>buttons / fields / toggles</span>
+              </div>
+
+              <div class="button-row">
+                <button class="primary-button" type="button">
+                  <span class="material-symbols-rounded" aria-hidden="true">check</span>
+                  Primary
+                </button>
+                <button class="secondary-button" type="button">
+                  <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+                  Secondary
+                </button>
+                <button class="ghost-button" type="button">
+                  <span class="material-symbols-rounded" aria-hidden="true">close</span>
+                  Ghost
+                </button>
+              </div>
+
+              <div class="control-grid">
+                <label class="field">
+                  <span>Name</span>
+                  <input type="text" value="Prototype shell" />
+                </label>
+                <div class="listbox-field" data-listbox>
+                  <span class="field-label">Density</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">Compact</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>Compact</span>
+                      <small>Dense editor</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Comfortable</span>
+                      <small>Review mode</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Wide</span>
+                      <small>Presentation</small>
+                    </button>
+                  </div>
+                </div>
+                <label class="field range-field">
+                  <span>Contrast</span>
+                  <input type="range" min="0" max="100" value="72" />
+                </label>
+                <label class="switch-row">
+                  <input type="checkbox" checked />
+                  <span class="switch" aria-hidden="true"></span>
+                  <strong>Show focus states</strong>
+                </label>
+              </div>
+            </section>
+
+            <section class="surface preview-surface">
+              <div class="surface-header">
+                <h3>Preview Frame</h3>
+                <span>layout rhythm</span>
+              </div>
+
+              <div class="preview-frame" aria-label="Layout preview">
+                <div class="mini-sidebar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="mini-stage">
+                  <div class="mini-toolbar"></div>
+                  <div class="mini-canvas">
+                    <div class="tile-grid">
+                      <i></i><i></i><i></i><i></i><i></i><i></i>
+                      <i></i><i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="selection-box"></div>
+                  </div>
+                </div>
+                <div class="mini-inspector">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface data-surface">
+              <div class="surface-header">
+                <h3>Data States</h3>
+                <span>stats / table / badges</span>
+              </div>
+
+              <div class="stat-row">
+                <div class="stat-cell">
+                  <span>Ready</span>
+                  <strong>24</strong>
+                </div>
+                <div class="stat-cell accent">
+                  <span>Queued</span>
+                  <strong>07</strong>
+                </div>
+                <div class="stat-cell warn">
+                  <span>Review</span>
+                  <strong>03</strong>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Pattern</th>
+                      <th>Status</th>
+                      <th>Owner</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Panel shell</td>
+                      <td><span class="mini-badge success">Stable</span></td>
+                      <td>Core</td>
+                    </tr>
+                    <tr>
+                      <td>Prompt dock</td>
+                      <td><span class="mini-badge warning">Test</span></td>
+                      <td>AI</td>
+                    </tr>
+                    <tr>
+                      <td>Export bar</td>
+                      <td><span class="mini-badge neutral">Draft</span></td>
+                      <td>Tools</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="surface lists-surface">
+              <div class="surface-header">
+                <h3>Common Lists</h3>
+                <span>listbox / rows / empty</span>
+              </div>
+
+              <div class="list-samples">
+                <div class="listbox-field wide" data-listbox>
+                  <span class="field-label">Sort</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">Recently updated</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>Recently updated</span>
+                      <small>Default</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Name A-Z</span>
+                      <small>Stable order</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Needs review</span>
+                      <small>Filtered queue</small>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="option-stack" role="listbox" aria-label="Reusable row examples">
+                  <button class="option-row selected" type="button" role="option" aria-selected="true">
+                    <span class="option-thumb material-symbols-rounded" aria-hidden="true">view_sidebar</span>
+                    <span class="option-copy">
+                      <strong>Primary row</strong>
+                      <small>Icon, title, metadata, status</small>
+                    </span>
+                    <em class="mini-badge success">Active</em>
+                  </button>
+                  <button class="option-row" type="button" role="option" aria-selected="false">
+                    <span class="option-thumb material-symbols-rounded" aria-hidden="true">checklist</span>
+                    <span class="option-copy">
+                      <strong>Checklist row</strong>
+                      <small>Multiple states without visual noise</small>
+                    </span>
+                    <em class="mini-badge warning">QA</em>
+                  </button>
+                  <button class="option-row disabled" type="button" role="option" aria-selected="false" disabled>
+                    <span class="option-thumb material-symbols-rounded" aria-hidden="true">lock</span>
+                    <span class="option-copy">
+                      <strong>Disabled row</strong>
+                      <small>Readable but clearly unavailable</small>
+                    </span>
+                    <em class="mini-badge neutral">Locked</em>
+                  </button>
+                </div>
+
+                <div class="empty-list" aria-label="Empty state example">
+                  <span class="material-symbols-rounded" aria-hidden="true">inbox</span>
+                  <strong>No matching items</strong>
+                  <small>Keep empty states compact and actionable.</small>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface menus-surface">
+              <div class="surface-header">
+                <h3>Popup Menus</h3>
+                <span>actions / context</span>
+              </div>
+
+              <div class="menu-samples">
+                <div class="menu-anchor" data-menu>
+                  <button class="secondary-button menu-trigger" type="button" aria-haspopup="menu" aria-expanded="false">
+                    <span class="material-symbols-rounded" aria-hidden="true">bolt</span>
+                    Actions
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="popup-menu" role="menu">
+                    <button class="menu-item" type="button" role="menuitem" data-toast="Rename queued">
+                      <span class="material-symbols-rounded" aria-hidden="true">drive_file_rename_outline</span>
+                      <span>
+                        <strong>Rename</strong>
+                        <small>Update visible label</small>
+                      </span>
+                    </button>
+                    <button class="menu-item" type="button" role="menuitem" data-toast="Duplicate queued">
+                      <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
+                      <span>
+                        <strong>Duplicate</strong>
+                        <small>Create a working copy</small>
+                      </span>
+                    </button>
+                    <button class="menu-item" type="button" role="menuitemcheckbox" aria-checked="true" data-toast="Pin toggled">
+                      <span class="material-symbols-rounded" aria-hidden="true">keep</span>
+                      <span>
+                        <strong>Pin to inspector</strong>
+                        <small>Keep selection visible</small>
+                      </span>
+                    </button>
+                    <div class="submenu-anchor" data-submenu>
+                      <button class="menu-item submenu-trigger" type="button" role="menuitem" aria-haspopup="menu" aria-expanded="false">
+                        <span class="material-symbols-rounded" aria-hidden="true">ios_share</span>
+                        <span>
+                          <strong>Export format</strong>
+                          <small>Open nested menu</small>
+                        </span>
+                        <span class="material-symbols-rounded submenu-arrow" aria-hidden="true">chevron_right</span>
+                      </button>
+                      <div class="popup-menu submenu" role="menu">
+                        <button class="menu-item" type="button" role="menuitem" data-toast="PNG export selected">
+                          <span class="material-symbols-rounded" aria-hidden="true">image</span>
+                          <span>
+                            <strong>PNG</strong>
+                            <small>Transparent asset</small>
+                          </span>
+                        </button>
+                        <button class="menu-item" type="button" role="menuitem" data-toast="JSON export selected">
+                          <span class="material-symbols-rounded" aria-hidden="true">data_object</span>
+                          <span>
+                            <strong>JSON</strong>
+                            <small>Design tokens</small>
+                          </span>
+                        </button>
+                        <button class="menu-item" type="button" role="menuitem" data-toast="Preset export selected">
+                          <span class="material-symbols-rounded" aria-hidden="true">folder_zip</span>
+                          <span>
+                            <strong>Preset pack</strong>
+                            <small>Reusable bundle</small>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="menu-divider" role="presentation"></div>
+                    <button class="menu-item danger" type="button" role="menuitem" data-toast="Delete requires review">
+                      <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+                      <span>
+                        <strong>Delete</strong>
+                        <small>Destructive action</small>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="context-target" tabindex="0" data-context-target>
+                  <span class="option-thumb material-symbols-rounded" aria-hidden="true">layers</span>
+                  <span class="option-copy">
+                    <strong>Canvas layer</strong>
+                    <small>Layer actions use the same menu tokens</small>
+                  </span>
+                  <button class="icon-button compact" data-context-open type="button" title="Layer menu" aria-label="Layer menu">
+                    <span class="material-symbols-rounded" aria-hidden="true">more_horiz</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface ai-surface">
+              <div class="surface-header">
+                <h3>AI Assist Dock</h3>
+                <span>prompt and actions</span>
+              </div>
+
+              <div class="prompt-box">
+                <label for="promptInput">Prompt</label>
+                <textarea id="promptInput">Refine spacing, contrast, and active states while keeping the dense editor layout.</textarea>
+                <div class="prompt-actions">
+                  <button class="ghost-button" type="button">
+                    <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
+                    Copy
+                  </button>
+                  <button class="primary-button" id="toastButton" type="button">
+                    <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                    Generate
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface state-surface">
+              <div class="surface-header">
+                <h3>Loading / Error</h3>
+                <span>skeleton / retry</span>
+              </div>
+
+              <div class="state-showcase">
+                <div class="skeleton-card" aria-label="Loading list preview">
+                  <div class="skeleton-header">
+                    <span class="skeleton-icon"></span>
+                    <span class="skeleton-line short"></span>
+                  </div>
+                  <span class="skeleton-line"></span>
+                  <span class="skeleton-line"></span>
+                  <span class="skeleton-line medium"></span>
+                </div>
+
+                <div class="error-callout" role="alert">
+                  <span class="material-symbols-rounded" aria-hidden="true">error</span>
+                  <span>
+                    <strong>Preview failed</strong>
+                    <small>Keep recovery compact and actionable.</small>
+                  </span>
+                  <button class="secondary-button compact-action" id="retryStateButton" type="button">
+                    <span class="material-symbols-rounded" aria-hidden="true">refresh</span>
+                    Retry
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface confirm-surface">
+              <div class="surface-header">
+                <h3>Confirm Dialog</h3>
+                <span>destructive action</span>
+              </div>
+
+              <div class="confirm-preview">
+                <div class="danger-summary">
+                  <span class="material-symbols-rounded" aria-hidden="true">warning</span>
+                  <span>
+                    <strong>Delete component set</strong>
+                    <small>Confirm intent before removing reusable work.</small>
+                  </span>
+                </div>
+                <div class="confirm-actions">
+                  <button class="secondary-button" id="openConfirmDialog" type="button">
+                    <span class="material-symbols-rounded" aria-hidden="true">shield</span>
+                    Review
+                  </button>
+                  <button class="ghost-button" type="button" data-ui-toast="Skipped destructive action">
+                    Skip
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="surface upload-surface">
+              <div class="surface-header">
+                <h3>Upload Progress</h3>
+                <span>queued / active / done</span>
+              </div>
+
+              <div class="upload-stack">
+                <div class="upload-row active">
+                  <span class="option-thumb material-symbols-rounded" aria-hidden="true">upload_file</span>
+                  <span class="upload-copy">
+                    <strong>layout-reference.png</strong>
+                    <small><span id="uploadProgressLabel">72%</span> uploaded</small>
+                  </span>
+                  <em class="mini-badge warning">Uploading</em>
+                  <div class="progress-track" aria-label="layout-reference.png upload progress">
+                    <span id="uploadProgressBar" style="width: 72%"></span>
+                  </div>
+                </div>
+
+                <div class="upload-row">
+                  <span class="option-thumb material-symbols-rounded" aria-hidden="true">image</span>
+                  <span class="upload-copy">
+                    <strong>mask-preview.webp</strong>
+                    <small>Ready for model input</small>
+                  </span>
+                  <em class="mini-badge success">Done</em>
+                </div>
+
+                <div class="upload-actions">
+                  <button class="secondary-button" id="advanceUploadButton" type="button">
+                    <span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>
+                    Advance
+                  </button>
+                  <button class="ghost-button" type="button" data-ui-toast="Upload queue paused">
+                    <span class="material-symbols-rounded" aria-hidden="true">pause</span>
+                    Pause
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+
+        <aside class="inspector-panel" aria-label="Inspector">
+          <div class="panel-header">
+            <div>
+              <h2>Inspector</h2>
+              <p>Selected component</p>
+            </div>
+            <button class="icon-button compact" type="button" title="Pin inspector" aria-label="Pin inspector">
+              <span class="material-symbols-rounded" aria-hidden="true">keep</span>
+            </button>
+          </div>
+
+          <div class="property-group">
+            <h3>Surface</h3>
+            <div class="listbox-field" data-listbox>
+              <span class="field-label">Token group</span>
+              <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="listbox-value">Tool dark</span>
+                <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+              </button>
+              <div class="listbox-popover" role="listbox">
+                <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                  <span>Tool dark</span>
+                  <small>Editor baseline</small>
+                </button>
+                <button class="listbox-option" type="button" role="option" aria-selected="false">
+                  <span>Console light</span>
+                  <small>Admin review</small>
+                </button>
+              </div>
+            </div>
+            <label class="field">
+              <span>Radius</span>
+              <input type="text" value="8px" />
+            </label>
+          </div>
+
+          <div class="property-group">
+            <h3>Checklist</h3>
+            <label class="check-row">
+              <input type="checkbox" checked />
+              <span>Dense but readable</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" checked />
+              <span>Clear active state</span>
+            </label>
+            <label class="check-row">
+              <input type="checkbox" />
+              <span>Mobile pass</span>
+            </label>
+          </div>
+
+          <div class="token-strip">
+            <span style="--swatch: var(--accent)"></span>
+            <span style="--swatch: var(--success)"></span>
+            <span style="--swatch: var(--warning)"></span>
+            <span style="--swatch: var(--danger)"></span>
+            <span style="--swatch: var(--surface-3)"></span>
+          </div>
+        </aside>
+      </div>
+
+      <section class="settings-panel" id="settingsPanel" aria-labelledby="settingsTitle" aria-hidden="true">
+        <div class="settings-dialog" role="dialog" aria-modal="true">
+          <div class="settings-header">
+            <div>
+              <h2 id="settingsTitle">Settings</h2>
+              <p>Workspace preferences</p>
+            </div>
+            <button class="icon-button compact" id="settingsClose" type="button" title="Close settings" aria-label="Close settings">
+              <span class="material-symbols-rounded" aria-hidden="true">close</span>
+            </button>
+          </div>
+
+          <div class="settings-body">
+            <div class="settings-tabs" role="tablist" aria-label="Settings sections">
+              <button class="settings-tab active" type="button" role="tab" aria-selected="true" data-settings-tab="general">
+                <span class="material-symbols-rounded" aria-hidden="true">tune</span>
+                General
+              </button>
+              <button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="appearance">
+                <span class="material-symbols-rounded" aria-hidden="true">contrast</span>
+                Appearance
+              </button>
+              <button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="ai">
+                <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                AI
+              </button>
+            </div>
+
+          <div class="settings-views">
+            <div class="settings-view active" data-settings-view="general">
+              <div class="setting-section">
+                <h3>Workspace</h3>
+                <label class="setting-row">
+                  <span>
+                    <strong>Auto save</strong>
+                    <small>Save edits while switching panels</small>
+                  </span>
+                  <input type="checkbox" checked />
+                </label>
+                <label class="setting-row">
+                  <span>
+                    <strong>Compact inspector</strong>
+                    <small>Use dense controls in side panels</small>
+                  </span>
+                  <input type="checkbox" checked />
+                </label>
+                <div class="listbox-field wide" data-listbox>
+                  <span class="field-label">Startup view</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">Last workspace</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>Last workspace</span>
+                      <small>Resume current context</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Component board</span>
+                      <small>Open template overview</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Blank canvas</span>
+                      <small>Start fresh</small>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-section">
+                <h3>Session</h3>
+                <div class="settings-status-grid">
+                  <div class="settings-status-cell">
+                    <span>Cache</span>
+                    <strong>218 MB</strong>
+                  </div>
+                  <div class="settings-status-cell">
+                    <span>Sync</span>
+                    <strong>Ready</strong>
+                  </div>
+                </div>
+                <button class="secondary-button settings-action" type="button" data-settings-toast="Cache cleared">
+                  <span class="material-symbols-rounded" aria-hidden="true">mop</span>
+                  Clear cache
+                </button>
+              </div>
+            </div>
+
+            <div class="settings-view" data-settings-view="appearance">
+              <div class="setting-section">
+                <h3>Theme</h3>
+                <div class="appearance-grid">
+                  <button class="theme-swatch selected" type="button" aria-label="Dark theme">
+                    <span></span>
+                    Dark
+                  </button>
+                  <button class="theme-swatch" type="button" aria-label="Light theme">
+                    <span></span>
+                    Light
+                  </button>
+                  <button class="theme-swatch" type="button" aria-label="System theme">
+                    <span></span>
+                    System
+                  </button>
+                </div>
+                <label class="field range-field">
+                  <span>Panel density</span>
+                  <input type="range" min="0" max="100" value="68" />
+                </label>
+                <label class="field range-field">
+                  <span>Text contrast</span>
+                  <input type="range" min="0" max="100" value="82" />
+                </label>
+              </div>
+
+              <div class="setting-section">
+                <h3>Editor chrome</h3>
+                <label class="setting-row">
+                  <span>
+                    <strong>Show status chips</strong>
+                    <small>Stable, QA, version markers</small>
+                  </span>
+                  <input type="checkbox" checked />
+                </label>
+                <label class="setting-row">
+                  <span>
+                    <strong>Reduce panel shadow</strong>
+                    <small>Flatten surfaces for long sessions</small>
+                  </span>
+                  <input type="checkbox" />
+                </label>
+              </div>
+            </div>
+
+            <div class="settings-view" data-settings-view="ai">
+              <div class="setting-section">
+                <h3>AI Defaults</h3>
+                <div class="listbox-field wide" data-listbox>
+                  <span class="field-label">Image model</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">gpt-image-2</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>gpt-image-2</span>
+                      <small>Main visual model</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>Reference only</span>
+                      <small>No generation</small>
+                    </button>
+                  </div>
+                </div>
+                <div class="listbox-field wide" data-listbox>
+                  <span class="field-label">Mockup size</span>
+                  <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span class="listbox-value">1536x1024</span>
+                    <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                  </button>
+                  <div class="listbox-popover" role="listbox">
+                    <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                      <span>1536x1024</span>
+                      <small>Wide UI reference</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>1024x1024</span>
+                      <small>Square component probe</small>
+                    </button>
+                    <button class="listbox-option" type="button" role="option" aria-selected="false">
+                      <span>2560x1440</span>
+                      <small>Experimental review</small>
+                    </button>
+                  </div>
+                </div>
+                <label class="setting-row">
+                  <span>
+                    <strong>Attach current screen</strong>
+                    <small>Use current UI as visual reference</small>
+                  </span>
+                  <input type="checkbox" checked />
+                </label>
+              </div>
+
+              <div class="setting-section">
+                <h3>Prompt guardrails</h3>
+                <div class="settings-note">
+                  <span class="material-symbols-rounded" aria-hidden="true">verified</span>
+                  <span>Preserve layout, avoid fake features, keep controls functional.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="settings-summary" aria-label="Settings summary">
+            <div class="summary-panel">
+              <h3>Overlay behavior</h3>
+              <p>Settings opens as a centered modal over a dimmed editor backdrop.</p>
+              <div class="summary-list">
+                <span><strong>Mode</strong> Modal overlay</span>
+                <span><strong>Close</strong> Backdrop / Esc</span>
+                <span><strong>State</strong> Local preview</span>
+              </div>
+            </div>
+            <div class="summary-panel">
+              <h3>Checks</h3>
+              <label class="check-row">
+                <input type="checkbox" checked />
+                <span>Covers editor</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" checked />
+                <span>Tabs stay stable</span>
+              </label>
+              <label class="check-row">
+                <input type="checkbox" />
+                <span>Persist settings</span>
+              </label>
+            </div>
+          </aside>
+          </div>
+        </div>
+      </section>
+
+      <div class="popup-menu context-menu" id="contextMenu" role="menu" aria-hidden="true">
+        <button class="menu-item" type="button" role="menuitem" data-toast="Layer moved up">
+          <span class="material-symbols-rounded" aria-hidden="true">arrow_upward</span>
+          <span>
+            <strong>Move up</strong>
+            <small>Change layer order</small>
+          </span>
+        </button>
+        <button class="menu-item" type="button" role="menuitem" data-toast="Layer hidden">
+          <span class="material-symbols-rounded" aria-hidden="true">visibility_off</span>
+          <span>
+            <strong>Hide layer</strong>
+            <small>Keep data intact</small>
+          </span>
+        </button>
+        <button class="menu-item" type="button" role="menuitem" data-toast="Layer locked">
+          <span class="material-symbols-rounded" aria-hidden="true">lock</span>
+          <span>
+            <strong>Lock layer</strong>
+            <small>Prevent edits</small>
+          </span>
+        </button>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+        <strong id="toastMessage">Preview request queued</strong>
+      </div>
+
+      <dialog class="modal" id="componentDialog" aria-labelledby="dialogTitle">
+        <form method="dialog">
+          <div class="modal-header">
+            <h2 id="dialogTitle">New Component Set</h2>
+            <button class="icon-button compact" value="cancel" type="submit" title="Close" aria-label="Close">
+              <span class="material-symbols-rounded" aria-hidden="true">close</span>
+            </button>
+          </div>
+          <label class="field">
+            <span>Set name</span>
+            <input type="text" value="Interaction states" />
+          </label>
+          <div class="listbox-field" data-listbox>
+            <span class="field-label">Category</span>
+            <button class="listbox-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="listbox-value">Core</span>
+              <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+            </button>
+            <div class="listbox-popover" role="listbox">
+              <button class="listbox-option selected" type="button" role="option" aria-selected="true">
+                <span>Core</span>
+                <small>Always visible</small>
+              </button>
+              <button class="listbox-option" type="button" role="option" aria-selected="false">
+                <span>Data</span>
+                <small>Tables and stats</small>
+              </button>
+              <button class="listbox-option" type="button" role="option" aria-selected="false">
+                <span>AI</span>
+                <small>Prompt surfaces</small>
+              </button>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="ghost-button" value="cancel" type="submit">Cancel</button>
+            <button class="primary-button" value="default" type="submit">
+              <span class="material-symbols-rounded" aria-hidden="true">add</span>
+              Create
+            </button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog class="modal confirm-dialog" id="confirmDialog" aria-labelledby="confirmTitle">
+        <form method="dialog">
+          <div class="modal-header">
+            <h2 id="confirmTitle">Delete component set?</h2>
+            <button class="icon-button compact" value="cancel" type="submit" title="Close" aria-label="Close">
+              <span class="material-symbols-rounded" aria-hidden="true">close</span>
+            </button>
+          </div>
+          <div class="confirm-body">
+            <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+            <p>This removes the draft set from the template board. Keep the copy short and the action unmistakable.</p>
+          </div>
+          <div class="modal-actions">
+            <button class="ghost-button" value="cancel" type="submit">Cancel</button>
+            <button class="primary-button danger-button" id="confirmDeleteButton" value="confirm" type="submit">
+              <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+              Delete
+            </button>
+          </div>
+        </form>
+      </dialog>
+    </div>
+
+    <script src="./app.js?v=template-extra-1"></script>
+  </body>
+</html>
