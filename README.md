@@ -33,6 +33,20 @@
 ## Resources
 - `resources/ui-template/`: 도구형 UI/UX 초기 프로토타이핑 기준 화면.
 
+## Agent Usage Example
+다른 프로젝트에서 에이전트에게 이 저장소를 쓰게 할 때는 아래처럼 짧게 지시한다.
+
+```md
+공용 작업 기준은 https://github.com/soonsoon2/soonsoonaiworks 를 참고한다.
+
+먼저 README.md만 읽고, 필요한 리소스의 README만 추가로 읽어라.
+repo 전체를 반복해서 읽지 말고, 현재 작업에 필요한 파일만 참조해라.
+
+UI/UX 초기 프로토타입이 필요하면 resources/ui-template/README.md를 읽고,
+resources/ui-template/을 기준 화면으로 삼아 필요한 패턴만 현재 프로젝트에 맞게 가져와라.
+테스트성 프로토타입은 현재 프로젝트의 tests/ 아래에 만든다.
+```
+
 ## Update Rule
 - 여러 프로젝트에 적용되는 작업 방식 변화만 이 저장소에 반영한다.
 - 기존 섹션을 우선 수정하고, 새 파일은 문서가 읽기 어려워졌을 때만 만든다.

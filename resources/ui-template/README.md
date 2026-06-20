@@ -22,6 +22,21 @@ UI/UX 초기 프로토타이핑용 컴포넌트 샘플 프로젝트다.
 5. 브라우저에서 데스크톱과 모바일 폭을 확인한다.
 6. 유지할 패턴만 실제 프로젝트로 옮긴다.
 
+## Agent Prompt Example
+새 프로젝트에서 UI 초안을 만들 때 에이전트에게 아래처럼 지시한다.
+
+```md
+https://github.com/soonsoon2/soonsoonaiworks 의 resources/ui-template/README.md를 참고해라.
+
+목표는 템플릿을 그대로 복제하는 것이 아니라,
+현재 프로젝트에 필요한 패널 구조, 버튼/필드 상태, 리스트, 팝업, 모달, 채팅 drawer, loading/error/confirm/upload 패턴만 선별해 적용하는 것이다.
+
+먼저 현재 프로젝트의 디자인/도메인/기술 스택을 확인하고,
+테스트성 UI 프로토타입은 tests/ui-template/ 아래에 만든다.
+구현 후 브라우저에서 데스크톱과 좁은 폭을 확인하고,
+겹침, 가로 오버플로우, 콘솔 에러, 주요 버튼 동작을 검증해라.
+```
+
 ## Listbox Checks
 - 네이티브 `select` 팝업이 전체 UI 톤을 깨면 커스텀 리스트박스를 쓴다.
 - 공용 리스트는 기본, hover, focus, selected, disabled, empty 상태를 같이 확인한다.
