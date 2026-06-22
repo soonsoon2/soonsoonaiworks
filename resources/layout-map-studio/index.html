@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Layout Map Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..24,400..600,0..1,0&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=layout-map-33" />
+  </head>
+  <body>
+    <div class="app-shell" data-theme="dark">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">LM</div>
+          <div>
+            <h1>Layout Map Studio</h1>
+            <p>Canvas and AI-readable UI map</p>
+          </div>
+        </div>
+
+        <div class="topbar-center" aria-label="Current map">
+          <span class="material-symbols-rounded" aria-hidden="true">schema</span>
+          <strong id="mapName">Blank canvas</strong>
+          <span id="nodeCount">5 nodes</span>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button" id="themeToggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+            <span class="material-symbols-rounded" aria-hidden="true">light_mode</span>
+          </button>
+          <button class="secondary-button" id="resetMapButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">restart_alt</span>
+            Reset
+          </button>
+          <button class="secondary-button" id="loadProjectButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">folder_open</span>
+            Load Project
+          </button>
+          <button class="secondary-button" id="exportPreviewButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">image</span>
+            PNG
+          </button>
+          <button class="primary-button" id="exportMapButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">data_object</span>
+            Export
+          </button>
+          <button class="primary-button" id="exportBundleButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">inventory_2</span>
+            Bundle
+          </button>
+          <button class="primary-button" id="saveProjectButton" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">drive_folder_upload</span>
+            Save Project
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace" data-dock="bottom">
+        <aside class="control-panel" aria-label="Inspector and hierarchy">
+          <section class="panel-section inspector-section">
+            <div class="panel-header">
+              <div>
+                <h2>Inspector</h2>
+                <p id="selectedMeta">region / content</p>
+              </div>
+            </div>
+
+            <div class="inspector-block">
+              <h3>Identity</h3>
+              <label class="field">
+                <span>ID</span>
+                <input id="nodeIdInput" type="text" spellcheck="false" />
+              </label>
+            </div>
+
+            <div class="inspector-block">
+              <h3>Purpose</h3>
+              <label class="field memo-field">
+                <span>Description</span>
+                <textarea id="nodeMemoInput" rows="4" placeholder="이 영역의 역할, 내용, 디자인 의도" aria-label="Region purpose memo"></textarea>
+              </label>
+            </div>
+
+            <div class="inspector-block">
+              <h3>Layout</h3>
+              <label class="field">
+                <span>Area</span>
+                <select id="nodeAreaInput" aria-label="Area override">
+                  <option value="auto">Auto</option>
+                  <option value="top">Top</option>
+                  <option value="body">Body</option>
+                  <option value="sidebar-left">Sidebar L</option>
+                  <option value="sidebar-right">Sidebar R</option>
+                  <option value="foot">Foot</option>
+                  <option value="section">Section</option>
+                </select>
+              </label>
+              <div class="property-grid">
+                <label class="field">
+                  <span>Flex</span>
+                  <input id="nodeFlexInput" type="number" min="0.4" max="4" step="0.1" />
+                </label>
+                <label class="field">
+                  <span>Gap</span>
+                  <input id="nodeGapInput" type="number" min="0" max="24" step="1" />
+                </label>
+              </div>
+            </div>
+
+            <div class="inspector-block">
+              <h3>Classes</h3>
+              <div class="class-list" id="classList"></div>
+            </div>
+
+            <div class="inspector-block final-role-block">
+              <h3>Final Role</h3>
+              <label class="field">
+                <span>Role</span>
+                <input id="nodeFinalRoleInput" type="text" spellcheck="false" placeholder="AI가 정리한 최종 역할" />
+              </label>
+            </div>
+          </section>
+
+          <section class="panel-section outline-section">
+            <div class="panel-header tight">
+              <div>
+                <h2>Hierarchy</h2>
+                <p>AI map tree</p>
+              </div>
+            </div>
+            <div class="outline-tree" id="outlineTree" aria-label="Layout hierarchy tree"></div>
+          </section>
+        </aside>
+
+        <div
+          class="column-resizer"
+          id="sidebarResizer"
+          role="separator"
+          tabindex="0"
+          aria-label="Resize left sidebar"
+          aria-orientation="vertical"
+        ></div>
+
+        <section class="canvas-stage" aria-label="Prototype canvas">
+          <div class="stage-toolbar">
+            <div>
+              <p class="eyebrow">Canvas / visible layout</p>
+              <h2 id="selectedTitle">Selected: content</h2>
+            </div>
+            <div class="tool-palette" aria-label="Canvas tools">
+              <button
+                class="tool-button is-active"
+                id="mainToolButton"
+                type="button"
+                aria-pressed="true"
+                title="Main tool. Shift cuts horizontal, Command+Shift cuts vertical, Alt removes a split line."
+                aria-label="Main layout tool"
+              >
+                <span class="material-symbols-rounded" aria-hidden="true">ads_click</span>
+                <span>Main</span>
+              </button>
+            </div>
+            <div class="status-group">
+              <div class="resolution-control" id="previewRatioControl">
+                <button
+                  class="resolution-trigger"
+                  id="previewRatioButton"
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                >
+                  <span>Preview</span>
+                  <strong id="previewRatioValue">16:9</strong>
+                  <span class="material-symbols-rounded" aria-hidden="true">expand_more</span>
+                </button>
+                <div class="resolution-menu" id="previewRatioMenu" role="menu" hidden>
+                  <button class="resolution-option is-selected" type="button" role="menuitemradio" aria-checked="true" data-ratio="16:9">
+                    <span>16:9</span>
+                    <small>Widescreen</small>
+                  </button>
+                  <button class="resolution-option" type="button" role="menuitemradio" aria-checked="false" data-ratio="4:3">
+                    <span>4:3</span>
+                    <small>Classic</small>
+                  </button>
+                  <button class="resolution-option" type="button" role="menuitemradio" aria-checked="false" data-ratio="1:1">
+                    <span>1:1</span>
+                    <small>Square</small>
+                  </button>
+                  <button class="resolution-option" type="button" role="menuitemradio" aria-checked="false" data-ratio="9:16">
+                    <span>9:16</span>
+                    <small>Vertical</small>
+                  </button>
+                </div>
+              </div>
+              <span class="status-chip success">Map synced</span>
+              <span class="status-chip warning" id="dockStatus" hidden>Tools hidden</span>
+              <span class="status-chip neutral">v0.1</span>
+            </div>
+          </div>
+
+          <div class="preview-zone" aria-label="Preview workspace">
+            <div class="canvas-frame" id="canvasFrame" tabindex="0" aria-label="Layout canvas"></div>
+
+            <div class="tool-dock" id="toolDock" aria-label="Layout tools" hidden>
+              <button class="dock-button" id="splitVerticalButton" type="button" title="Vertical split (V)" aria-label="Vertical split">
+                <span class="material-symbols-rounded" aria-hidden="true">splitscreen_left</span>
+              </button>
+              <button class="dock-button" id="splitHorizontalButton" type="button" title="Horizontal split (H)" aria-label="Horizontal split">
+                <span class="material-symbols-rounded" aria-hidden="true">splitscreen_top</span>
+              </button>
+              <button class="dock-button" id="addRegionButton" type="button" title="Add region (A)" aria-label="Add region">
+                <span class="material-symbols-rounded" aria-hidden="true">add_box</span>
+              </button>
+              <span class="dock-divider" aria-hidden="true"></span>
+              <button class="dock-button" id="duplicateButton" type="button" title="Duplicate selected" aria-label="Duplicate selected">
+                <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
+              </button>
+              <button class="dock-button danger" id="deleteButton" type="button" title="Delete selected" aria-label="Delete selected">
+                <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+              </button>
+              <span class="dock-divider" aria-hidden="true"></span>
+              <button class="dock-button" id="nextNodeButton" type="button" title="Next region" aria-label="Next region">
+                <span class="material-symbols-rounded" aria-hidden="true">keyboard_tab</span>
+              </button>
+              <button class="dock-button" id="copyPromptButton" type="button" title="Copy AI prompt" aria-label="Copy AI prompt">
+                <span class="material-symbols-rounded" aria-hidden="true">content_paste_go</span>
+              </button>
+              <span class="dock-divider" aria-hidden="true"></span>
+              <button class="dock-button" id="dockBottomButton" type="button" title="Dock bottom" aria-label="Dock bottom">
+                <span class="material-symbols-rounded" aria-hidden="true">vertical_align_bottom</span>
+              </button>
+              <button class="dock-button" id="dockLeftButton" type="button" title="Dock left" aria-label="Dock left">
+                <span class="material-symbols-rounded" aria-hidden="true">vertical_align_center</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="row-resizer"
+            id="aiPanelResizer"
+            role="separator"
+            tabindex="0"
+            aria-label="Resize AI View"
+            aria-orientation="horizontal"
+          ></div>
+
+          <section class="ai-panel" aria-label="AI view">
+            <section class="panel-section ai-section">
+              <div class="panel-header tight">
+                <div>
+                  <h2>AI View</h2>
+                  <p>Same layout as code</p>
+                </div>
+              </div>
+              <div class="code-tabs" role="tablist" aria-label="AI map views">
+                <button class="code-tab active" type="button" data-view="map">Map</button>
+                <button class="code-tab" type="button" data-view="rules">Rules</button>
+                <button class="code-tab" type="button" data-view="prompt">Prompt</button>
+              </div>
+              <pre class="code-panel" id="aiCode" aria-live="polite"></pre>
+            </section>
+          </section>
+        </section>
+
+        <div
+          class="agent-resizer"
+          id="agentResizer"
+          role="separator"
+          tabindex="0"
+          aria-label="Resize agent chat"
+          aria-orientation="vertical"
+        ></div>
+
+        <aside class="agent-panel" aria-label="AI agent chat">
+          <section class="agent-header">
+            <div>
+              <h2>Agent</h2>
+              <p>SAM layout assistant</p>
+            </div>
+            <span class="agent-status" id="agentStatus">Ready</span>
+          </section>
+
+          <div class="agent-section agent-thread-section">
+            <h3>Conversation</h3>
+            <div class="agent-thread" id="agentThread" aria-live="polite">
+              <article class="agent-message assistant">
+                <span class="message-avatar material-symbols-rounded" aria-hidden="true">neurology</span>
+                <div>
+                  <strong>Agent</strong>
+                  <p>현재 캔버스, AI View, Hierarchy, Inspector 내용을 바탕으로 구조를 정리하고 역할을 제안할 수 있어요.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="agent-section">
+            <h3>Actions</h3>
+            <div class="agent-actions" aria-label="Agent quick actions">
+              <button class="agent-chip" type="button" data-agent-action="review">
+                <span class="material-symbols-rounded" aria-hidden="true">fact_check</span>
+                Review
+              </button>
+              <button class="agent-chip" type="button" data-agent-action="assign-roles">
+                <span class="material-symbols-rounded" aria-hidden="true">label</span>
+                Roles
+              </button>
+              <button class="agent-chip" type="button" data-agent-action="refine">
+                <span class="material-symbols-rounded" aria-hidden="true">auto_fix_high</span>
+                Refine
+              </button>
+            </div>
+          </div>
+
+          <form class="agent-composer" id="agentComposer">
+            <h3>Message</h3>
+            <div class="composer-box">
+              <textarea id="agentInput" rows="3" placeholder="정리하거나 확인할 내용을 입력" aria-label="Agent message"></textarea>
+              <div class="composer-footer">
+                <div class="composer-tools" aria-label="Message tools">
+                  <button class="composer-tool" type="button" title="Attach file" aria-label="Attach file">
+                    <span class="material-symbols-rounded" aria-hidden="true">attach_file</span>
+                  </button>
+                  <button class="composer-tool" type="button" title="Reasoning" aria-label="Reasoning">
+                    <span class="material-symbols-rounded" aria-hidden="true">psychology_alt</span>
+                  </button>
+                  <button class="composer-tool" type="button" title="Voice input" aria-label="Voice input">
+                    <span class="material-symbols-rounded" aria-hidden="true">mic</span>
+                  </button>
+                </div>
+                <div class="composer-send-group">
+                  <button class="composer-model" type="button" title="Agent mode" aria-label="Agent mode">
+                    <span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+                    SAM Agent
+                  </button>
+                  <button class="agent-send" type="submit" title="Send" aria-label="Send message">
+                    <span class="material-symbols-rounded" aria-hidden="true">send</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </aside>
+
+        <div class="toast" id="toast" role="status" aria-live="polite">
+          <span class="material-symbols-rounded" aria-hidden="true">check_circle</span>
+          <strong id="toastMessage">Map updated</strong>
+        </div>
+      </main>
+
+      <footer class="history-foot" aria-label="Event history">
+        <div class="history-control-group">
+          <div class="history-title">
+            <strong>Foot</strong>
+            <span id="historyStateLabel">Ready</span>
+          </div>
+          <div class="history-buttons" aria-label="History controls">
+            <button class="history-button" id="undoButton" type="button" title="Undo" aria-label="Undo" disabled>
+              <span class="material-symbols-rounded" aria-hidden="true">undo</span>
+            </button>
+            <button class="history-button" id="redoButton" type="button" title="Redo" aria-label="Redo" disabled>
+              <span class="material-symbols-rounded" aria-hidden="true">redo</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="history-stream" id="historyList" aria-live="polite"></div>
+
+        <div class="history-meta">
+          <span class="history-count" id="historyCount">0 events</span>
+        </div>
+      </footer>
+    </div>
+
+    <script src="./app.js?v=layout-map-33"></script>
+  </body>
+</html>
