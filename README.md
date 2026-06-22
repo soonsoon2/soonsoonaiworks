@@ -32,6 +32,7 @@
 
 ## Resources
 - `resources/ui-template/`: 도구형 UI/UX 초기 프로토타이핑 기준 화면.
+- `resources/layout-map-studio/`: UI 레이아웃을 `layoutMap` JSON, preview image, brief로 정리하는 공용 작업대.
 
 ## Agent Usage Example
 다른 프로젝트에서 에이전트에게 이 저장소를 쓰게 할 때는 아래처럼 짧게 지시한다.
@@ -44,6 +45,9 @@ repo 전체를 반복해서 읽지 말고, 현재 작업에 필요한 파일만 
 
 UI/UX 초기 프로토타입이 필요하면 resources/ui-template/README.md를 읽고,
 resources/ui-template/을 기준 화면으로 삼아 필요한 패턴만 현재 프로젝트에 맞게 가져와라.
+
+구현 전에 화면 배치부터 정해야 하면 resources/layout-map-studio/README.md를 읽고,
+layoutMap을 만든 뒤 `Bundle` 또는 `Save Project`로 `layout-map.json`, `layout-preview.png`, `layout-brief.md`를 현재 프로젝트 구현 입력으로 써라.
 테스트성 프로토타입은 현재 프로젝트의 tests/ 아래에 만든다.
 ```
 
